@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use App\Models\Tag;
 use App\Models\Type;
 use App\Models\Event;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -29,7 +31,8 @@ class EventsController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.dashboard.event.create', ['types' => $types]);
+        $tags = Tag::pluck('name')->toArray();
+        return view('admin.dashboard.event.create', ['types' => $types, 'tags' => $tags]);
     }
 
     /**
@@ -48,7 +51,26 @@ class EventsController extends Controller
             $data['image'] = $imageUrl;
         }
 
-        Event::create($data);
+        $event = Event::create($data);
+
+
+        if ($request->tags) {
+            $tagIds = [];
+            $tags = json_decode($request->tags);
+            foreach ($tags as $item) {
+                $tag = Tag::where('name', $item->value)->first();
+                if (!$tag) {
+                    $tag = Tag::create([
+                        'name' => $item->value,
+                        'slug' => Str::slug($item->value)
+                    ]);
+                }
+                $tagIds[] = $tag->id;
+            }
+            $event->tags()->attach($tagIds);
+        }
+
+
         return redirect()->route('events.index')->with('success', 'Event Addedd Successfully');
     }
 
