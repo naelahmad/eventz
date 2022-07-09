@@ -21,7 +21,9 @@ class CreateEventsTable extends Migration
             $table->integer('price')->nullable();
             $table->string('image')->nullable();
             $table->integer('available_tickets')->nullable();
+            $table->integer('sold_tickets')->nullable();
             $table->date('event_date')->nullable();
+            $table->boolean('refund')->default(false);
 
 
             $table->unsignedBigInteger('event_type')->nullable();

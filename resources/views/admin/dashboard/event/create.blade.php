@@ -7,47 +7,66 @@
             </div>
             <div class="card-body">
                 <div class="basic-form">
-                    <form action="{{ route('events.store') }}" method="POST">
+                    <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <x-admin.label for="title" value="Enter Event Title" />
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"
-                                    id="title" value="{{ old('title') }}">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="form-group">
+                                    <x-admin.label for="title" value="Enter Event Title" />
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                        name="title" id="title" value="{{ old('title') }}">
+                                </div>
                             </div>
-                            <div class="form-group col-md-12">
-                                <x-admin.label for="address" value="Enter Event Location" />
-                                <input type="text" class="form-control @error('address') is-invalid @enderror" name="title"
-                                    id="address" value="{{ old('address') }}">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <x-admin.label for="description" value="Enter Event Description" />
-                                <textarea name="description" id="description" cols="30" rows="10"
-                                    class="form-control @error('description') is-invalid @enderror"
-                                    value="{{ old('description') }}">
-                                </textarea>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <x-admin.label for="price" value="Enter Event Price" />
-                                <input type="text" class="form-control @error('price') is-invalid @enderror" name="title"
-                                    id="price" value="{{ old('price') }}">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <x-admin.label for="available_tickets" value="Enter Event Available Tickets" />
-                                <input type="text" class="form-control @error('available_tickets') is-invalid @enderror"
-                                    name="title" id="available_tickets" value="{{ old('available_tickets') }}">
-                            </div>
-
-                            <div class="form-group col-md-12">
-                                <x-admin.label for="event_date" value="Enter Event Date" />
-                                <input name="event_date" class="datepicker-default form-control" id="event_date">
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="form-group">
+                                    <x-admin.label for="title" value="Enter Event Image" />
+                                    <input type="file" name="image" id="image">
+                                </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </form>
+
+                        <div class="form-group col-md-12">
+                            <x-admin.label for="address" value="Enter Event Location" />
+                            <input type="text" class="form-control @error('address') is-invalid @enderror" name="address"
+                                id="address" value="{{ old('address') }}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <x-admin.label for="description" value="Enter Event Description" />
+                            <textarea name="description" id="description" cols="30" rows="10"
+                                class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}">
+                                </textarea>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <x-admin.label for="price" value="Enter Event Price" />
+                            <input type="text" class="form-control @error('price') is-invalid @enderror" name="price"
+                                id="price" value="{{ old('price') }}">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <x-admin.label for="available_tickets" value="Enter Event Available Tickets" />
+                            <input type="text" class="form-control @error('available_tickets') is-invalid @enderror"
+                                name="available_tickets" id="available_tickets" value="{{ old('available_tickets') }}">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <x-admin.label for="event_date" value="Enter Event Date" />
+                            <input name="event_date" class="datepicker-default form-control" id="event_date">
+                        </div>
                 </div>
+                <div class="form-group col-md-12">
+                    <x-admin.label for="event_type" value="Select Event Type" />
+
+                    <select id="single-select" name="event_type" class="form-control">
+                        @foreach ($types as $type)
+                            <option value="{{ $type->id }}">{{ $type->title }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create</button>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 @endsection

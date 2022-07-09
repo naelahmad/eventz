@@ -14,7 +14,7 @@
                             <div class="form-group col-md-12">
                                 <x-admin.label for="title" value="Event Type" />
                                 <input type="text" class="form-control" name="title" id="title"
-                                    value="{{ $type->title }}">
+                                    value="{{ old('title') }}">
                             </div>
                             <button type="submit" class="btn btn-primary">Create</button>
                     </form>

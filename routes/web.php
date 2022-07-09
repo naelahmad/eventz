@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\TypesController;
 use App\Http\Controllers\Admin\EventsController;
 use App\Http\Controllers\Admin\ContactsController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +20,12 @@ use App\Http\Controllers\Admin\ContactsController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
 
 Route::resource('types', TypesController::class);
 Route::resource('faqs', FaqsController::class);

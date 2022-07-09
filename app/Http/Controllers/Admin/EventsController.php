@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use App\Models\Type;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,8 @@ class EventsController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::all();
+        return view('admin.dashboard.event.index', ['events' => $events]);
     }
 
     /**
@@ -26,7 +28,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        $types = Event::all();
+        $types = Type::all();
         return view('admin.dashboard.event.create', ['types' => $types]);
     }
 
@@ -39,10 +41,12 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['event_date'] = Carbon::parse($request->event_date)->format('d-m-Y');
-        dd($data['event_date']);
-        // $timestamp = strtotime($request->event_date);
-        // print date('Y-m-d', $timestamp);
+        $image = $request->file('image');
+
+        if ($request->hasFile('image')) {
+            $imageUrl = $image->store('events', 'public');
+            $data['image'] = $imageUrl;
+        }
 
         Event::create($data);
         return redirect()->route('events.index')->with('success', 'Event Addedd Successfully');
