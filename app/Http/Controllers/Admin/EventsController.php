@@ -139,7 +139,6 @@ class EventsController extends Controller
     public function restore($id)
     {
         Event::withTrashed()->find($id)->restore();
-
         return redirect()->back();
         return redirect()->route('events.index')->with('success', 'Event Restored Successfully');
     }

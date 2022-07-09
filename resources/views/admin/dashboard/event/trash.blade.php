@@ -54,6 +54,7 @@
                                                         </g>
                                                     </svg>
                                                 </button>
+
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item"
                                                         href="{{ route('events.edit', $event->id) }}">Edit</a>
