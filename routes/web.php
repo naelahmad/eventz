@@ -30,5 +30,11 @@ require __DIR__ . '/auth.php';
 
 Route::resource('types', TypesController::class);
 Route::resource('faqs', FaqsController::class);
+Route::get('events/trashed', [EventsController::class, 'gettrashed']);
+Route::get('events/restore/{id}', [EventsController::class, 'restore'])->name('events.restore');
+Route::get('events/restore-all', [EventsController::class, 'restoreAll'])->name('events.restoreAll');
+Route::delete('events/focedelete/{id}', [EventsController::class, 'forcedelete'])->name('events.forcedelete');
+
+
 Route::resource('events', EventsController::class);
 Route::resource('contacts', ContactsController::class);

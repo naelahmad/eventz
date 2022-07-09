@@ -824,7 +824,7 @@
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                             <circle cx="12" cy="7" r="4"></circle>
                                         </svg>
-                                        <span class="ml-2">{{ Auth::user()->name ?? "" }} Profile </span>
+                                        <span class="ml-2">{{ Auth::user()->name ?? '' }} Profile </span>
                                     </a>
                                     <a href="./email-inbox.html" class="dropdown-item ai-icon">
                                         <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success"

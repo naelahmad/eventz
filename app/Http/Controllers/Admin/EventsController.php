@@ -115,6 +115,56 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Event::find($id)->delete();
+        return redirect()->route('events.index')->with('success', 'Event Successflly Deleted');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function gettrashed()
+    {
+        $events = Event::onlyTrashed()
+            ->get();
+        return view('admin.dashboard.event.trash', ['events' => $events]);
+    }
+    /**
+     * restore specific event
+     *
+     * @return void
+     */
+
+    public function restore($id)
+    {
+        Event::withTrashed()->find($id)->restore();
+
+        return redirect()->back();
+        return redirect()->route('events.index')->with('success', 'Event Restored Successfully');
+    }
+
+    /**
+     * restore all post
+     *
+     * @return response()
+     */
+    public function restoreAll()
+    {
+        Event::onlyTrashed()->restore();
+
+        return redirect()->route('events.index')->with('success', 'All Trashed Events Restored Successfully');
+    }
+
+    /**
+     * force delete specific event
+     *
+     * @return void
+     */
+    public function forcedelete($id)
+    {
+        Event::withTrashed()->find($id)->forceDelete();
+
+        return redirect()->route('events.index')->with('success', 'Event Permantly Deleted');
     }
 }
