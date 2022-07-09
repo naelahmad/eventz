@@ -21,6 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/* not access dashboard if not admin*/
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'userType'])->name('dashboard');

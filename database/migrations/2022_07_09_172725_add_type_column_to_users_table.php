@@ -15,7 +15,7 @@ class AddTypeColumnToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->enum('type', ['admin', 'user', 'super-admin'])
-                ->default('user')->after('email');
+                ->default('user')->after('name');
         });
     }
 

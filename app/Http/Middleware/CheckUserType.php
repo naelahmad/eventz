@@ -18,7 +18,7 @@ class CheckUserType
     public function handle(Request $request, Closure $next)
     {
         if (Auth::user()->type != 'admin') {
-            abort(401);
+            abort(403);
         }
         return $next($request);
     }
