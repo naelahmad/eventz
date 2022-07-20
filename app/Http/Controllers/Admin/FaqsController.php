@@ -66,10 +66,9 @@ class FaqsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Faq $faq)
     {
-        $faq = Faq::findOrfail($id);
-        dd($faq);
+        return view('admin.dashboard.faqs.edit', [['faq' => $faq]]);
     }
 
     /**
@@ -86,8 +85,8 @@ class FaqsController extends Controller
             'question.required' => 'A question is required',
             'answer.required' => 'A answer is required',
         ]);
-        $data = $request->all();
-        $faq->update($data);
+        $faq->update($request->all());
+        return redirect()->route('faqs.index')->with('success', 'FAQ Updated Successfully');
     }
 
     /**
@@ -96,9 +95,8 @@ class FaqsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Faq $faq)
     {
-        $faq = Faq::findOrfail($id);
         $faq->delete();
         return redirect()->route('faqs.index')->with('success', 'FAQ Deleted Sucessfully');
     }

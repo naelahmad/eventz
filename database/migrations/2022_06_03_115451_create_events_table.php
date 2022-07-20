@@ -17,11 +17,10 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('address')->nullable();
-            $table->text('description');
+            $table->bg('description');
             $table->integer('price')->nullable();
             $table->string('image')->nullable();
             $table->integer('available_tickets')->nullable();
-            $table->integer('sold_tickets')->nullable();
             $table->date('event_date')->nullable();
             $table->boolean('refund')->default(false);
 
