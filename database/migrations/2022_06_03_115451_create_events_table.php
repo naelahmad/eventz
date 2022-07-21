@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('address')->nullable();
-            $table->bg('description');
+            $table->longText('description');
             $table->integer('price')->nullable();
             $table->string('image')->nullable();
             $table->integer('available_tickets')->nullable();

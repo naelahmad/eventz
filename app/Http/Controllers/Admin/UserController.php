@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,7 +22,6 @@ class UserController extends Controller
             'old_password' => 'required',
             'new_password' => 'required|confirmed',
         ]);
-
 
         //check The Old Password
         if (!Hash::check($request->old_password, auth()->user()->password)) {

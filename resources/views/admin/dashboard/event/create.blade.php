@@ -31,11 +31,8 @@
                             <input type="text" class="form-control @error('address') is-invalid @enderror" name="address"
                                 id="address" value="{{ old('address') }}">
                         </div>
-                        <div class="form-group col-md-12">
-                            <x-admin.label for="description" value="Enter Event Description" />
-                            <textarea name="description" id="description" cols="30" rows="10"
-                                class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}">
-                                </textarea>
+                        <div class="form-group">
+                            <textarea class="ckeditor form-control" name="content" id="editor1"></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <x-admin.label for="price" value="Enter Event Price" />
@@ -69,4 +66,13 @@
         </div>
     </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor 4
+        // instance, using default configuration.
+        CKEDITOR.replace('editor1');
+    </script>
 @endsection

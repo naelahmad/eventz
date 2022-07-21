@@ -1,6 +1,14 @@
 @extends('admin.layout.app')
 @section('content')
     <div class="row">
+        <div class="card-body">
+            <form action="{{ route('events.index') }}" method="get" class="form-inline">
+                <input type="text" class="form-control" name="event_name" placeholder="Event Name">
+                <input type="number" class="form-control" name="min_price" placeholder="Price From">
+                <input type="number" class="form-control" name="max_price" placeholder="Price To">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
         <div class="col-lg-12">
             <a href="{{ route('events.create') }}" class="btn btn-primary mb-3">
                 Create New Event
